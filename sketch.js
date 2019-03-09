@@ -4,7 +4,7 @@ function setup() {
     noStroke();
     
 }
-var controls = ["left","right","top","bottom","front","back"];
+var controls = ["left","right","top","bottom","front","back","leftAnti","rightAnti","topAnti","bottomAnti","frontAnti"];
 var angle1 = 0.0;
 var angle2 = 0.0;
 var angle3 = 0.0;
@@ -13,11 +13,11 @@ var chosen = "left";
 var cube = new Rubiks();
 
 function rotagain(){
-    if(chosen == "left" || chosen == "right"){
+    if(chosen == "left" || chosen == "right" || chosen == "leftAnti" || chosen == "rightAnti"){
         rotnum[0] +=1; 
-    }else if(chosen == "top" || chosen == "bottom"){
+    }else if(chosen == "top" || chosen == "bottom" || chosen == "topAnti" || chosen == "bottomAnti"){
         rotnum[1] += 1; 
-    }else if(chosen == "front" || chosen == "back"){
+    }else if(chosen == "front" || chosen == "back" || chosen == "frontAnti" || chosen == "backAnti"){
         rotnum[2] += 1;
     }
     chosen = controls[Math.floor(Math.random()*controls.length)];
@@ -61,11 +61,11 @@ function draw() {
     rotateX(-PI/6);
     rotateY(PI/4);
 
-    if(chosen == "left" || chosen == "right"){
+    if(chosen == "left" || chosen == "right" || chosen == "leftAnti" || chosen == "rightAnti"){
         angle1 = switchRot(angle1,rotnum[0]);
-    }else if(chosen == "top" || chosen == "bottom"){
+    }else if(chosen == "top" || chosen == "bottom" || chosen == "topAnti" || chosen == "bottomAnti"){
         angle2 = switchRot(angle2,rotnum[1]);
-    }else if(chosen == "front" || chosen == "back"){
+    }else if(chosen == "front" || chosen == "back" || chosen == "frontAnti" || chosen == "backAnti"){
         angle3 = switchRot(angle3,rotnum[2]);
     }
 
@@ -224,27 +224,9 @@ function Rubiks() {
 
         ]
     ];
-
-    this.vertices = [
-        
-    ];
+ 
     console.log(this.centers);
 
-    this.rotateL = function () {
-        rotateX(angle);
-        for (let i = 0; i < 3; i++) {
-            for (let j = 0; j < 3; j++) {
-                specularMaterial(this.colors[i][j][0].R, this.colors[i][j][0].B, this.colors[i][j][0].G);
-                //fill(this.colors[i][j][k].R,this.colors[i][j][k].B,this.colors[i][j][k].G);
-                stroke(30);
-                strokeWeight(6);
-                translate(this.centers[i][j][0].x + offset, this.centers[i][j][0].y + offset, this.centers[i][j][0].z + offset);
-                box(100);
-                translate(-this.centers[i][j][0].x - offset, -this.centers[i][j][0].y - offset, -this.centers[i][j][0].z - offset);
-            }
-
-        }
-    }
     this.internal = function (i, j, k) {
         specularMaterial(this.colors[i][j][k].R, this.colors[i][j][k].B, this.colors[i][j][k].G);
         //fill(this.colors[i][j][k].R,this.colors[i][j][k].B,this.colors[i][j][k].G);
@@ -462,6 +444,18 @@ function Rubiks() {
        this.rotateFrontClockwise();
        else if(chosen == "back")
        this.rotateBackClockwise();
+       else if(chosen == "leftAnti")
+       this.rotateLeftAntiClockwise();
+       else if(chosen == "rightAnti")
+       this.rotateRightAntiClockwise();
+       else if(chosen == "topAnti")
+       this.rotateTopAntiClockwise();
+       else if(chosen == "bottomAnti")
+       this.rotateBottomAntiClockwise();
+       else if (chosen == "frontAnti")
+       this.rotateFrontAntiClockwise();
+       else if(chosen == "backAnti")
+       this.rotateBackAntiClockwise();
          //this.rotateFrontAntiClockwise();
          //this.rotateFrontClockwise();
          //this.rotateBackAntiClockwise();
