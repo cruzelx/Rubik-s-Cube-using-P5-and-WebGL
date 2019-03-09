@@ -13,6 +13,8 @@ var chosen = "left";
 var cube = new Rubiks();
 
 function rotagain(){
+    
+    chosen = controls[Math.floor(Math.random()*controls.length)];
     if(chosen == "left" || chosen == "right" || chosen == "leftAnti" || chosen == "rightAnti"){
         rotnum[0] +=1; 
     }else if(chosen == "top" || chosen == "bottom" || chosen == "topAnti" || chosen == "bottomAnti"){
@@ -20,7 +22,6 @@ function rotagain(){
     }else if(chosen == "front" || chosen == "back" || chosen == "frontAnti" || chosen == "backAnti"){
         rotnum[2] += 1;
     }
-    chosen = controls[Math.floor(Math.random()*controls.length)];
     document.getElementById('display').innerHTML = chosen;
 }
 function switchRot(angle,rotnum){
